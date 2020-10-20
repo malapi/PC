@@ -1,8 +1,6 @@
 <?php
 include_once("Tarea.php");
 class MiPrimerHilo extends Thread{
-
-   
    public function __construct(Threaded $unObj_tarea) {
       $this->tarea = $unObj_tarea;
      
