@@ -2,14 +2,7 @@
 include_once("Tarea.php");
 include_once("miHiloPorParametro.php");
 $obj_tarea = new Tarea();
-//$miHilo = new miHiloPorParametro($obj_tarea);
 
-/*if ($miHilo->start())
-    echo "El hilo se creo correctamente \n";;
-
- $miHilo->join();
-
-*/
 $cant_hilos = 5;
 for ($i = 1; $i <= $cant_hilos; $i++) {
     $t[$i] = new miHiloPorParametro($obj_tarea,$i);
