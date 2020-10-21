@@ -9,7 +9,6 @@
     }
 
     public function run()  {
-
         $this->tarea->escribeNumerosHasta(20,$this->getId_hilo());
     }
 
