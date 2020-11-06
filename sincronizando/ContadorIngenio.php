@@ -1,6 +1,5 @@
 <?php
 class ContadorIngenio extends Thread{
-
      public $i = 0;
      public function __construct()  {
       
@@ -18,7 +17,5 @@ for ($i = 0; $i < 10; ++$i) {
 }
 
 $obj->join();
-
 var_dump($obj->i);
-
 ?>

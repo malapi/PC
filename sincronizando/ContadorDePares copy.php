@@ -17,8 +17,7 @@ class ContadorDePares extends Thread{
                 $this->contador++;
                 $this->notify();
         }
-        if ($this->contador < $this->cuantos 
-                && ($this->contador  % 2) != 0) {
+        if ($this->contador < $this->cuantos && ($this->contador  % 2) != 0) {
                  $this->wait();
              }
          }
@@ -36,8 +35,7 @@ $yoPares->synchronized(function ($yoImpares) {
            $yoImpares->contador++;
            $yoImpares->notify();
         }
-        if ($yoImpares->contador < $yoImpares->cuantos 
-            && ($yoImpares->contador  % 2) == 0) {
+        if ($yoImpares->contador < $yoImpares->cuantos && ($yoImpares->contador  % 2) == 0) {
             $yoImpares->wait();
         }
     }
