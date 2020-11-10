@@ -1,21 +1,19 @@
 <?php
-class ContadorIngenio extends Thread{
-     public $i = 0;
-     public function __construct()  {
-      
-    }
+class ContadorIngenuo extends Thread{
+     public $contador = 0;
+     public function __construct()  {}
      public function run(){
       for ($i = 0; $i < 10; ++$i) {
-         ++$this->i;
-     }
-     }
+         echo "run ".$this->contador.PHP_EOL;
+         $this->contador++;
+      } }
 }
-$obj = new ContadorIngenio();
+$obj = new ContadorIngenuo();
 $obj->start();
 for ($i = 0; $i < 10; ++$i) {
-   ++$obj->i;
+   echo "afuera ".$obj->contador.PHP_EOL;
+   $obj->contador++;
 }
-
 $obj->join();
-var_dump($obj->i);
+echo "FINAL ".$obj->contador.PHP_EOL;
 ?>

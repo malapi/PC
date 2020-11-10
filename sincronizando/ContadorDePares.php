@@ -1,17 +1,12 @@
 <?php
 class ContadorDePares extends Thread{
-
      private $contador  = 0;
      private $cuantos;
-     public function __construct($Cuantos)  {
-         $this->cuantos = $Cuantos;
-      
-    }
+     public function __construct($Cuantos) {
+         $this->cuantos = $Cuantos; }
      public function run(){
       $this->synchronized(function () {
-
         for ($i=0;$i < $this->cuantos;$i++) {
-
              if (($this->contador  % 2) == 0) {
                 echo $this->contador." es par ";
                 $this->contador++;
