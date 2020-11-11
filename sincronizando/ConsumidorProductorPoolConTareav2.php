@@ -1,10 +1,10 @@
 <?php
 class Productor extends Threaded {
     public function accion($hilo) {
-        echo "Recien entro al Productor ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
+       // echo "Recien entro al Productor ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
         for($i=0; $i <= $hilo->info->proddiaria;$i++){
                 $hilo->info->producir($hilo->id);
-                echo "Recien Produci ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
+               // echo "Recien Produci ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
         }
         $hilo->notify();
         echo "Termine me voy Productor ".$hilo->id. PHP_EOL;
@@ -12,14 +12,14 @@ class Productor extends Threaded {
 }
 class Consumidor extends Threaded {
      public function accion($hilo) {
-        echo "Recien entro a Consumir ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
+        //echo "Recien entro a Consumir ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
         for($i=0; $i < $hilo->info->consdiaria;$i++){
             if($hilo->info->hayparacomer()){
                 $hilo->info->consumir($hilo->id);
-                echo "Recien Consumi ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
+               // echo "Recien Consumi ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
             } else {
-                echo "Consumir ".$hilo->id.", me faltan ".($hilo->info->consdiaria - $i)
-                ." Voy a esperar ". PHP_EOL;
+               // echo "Consumir ".$hilo->id.", me faltan ".($hilo->info->consdiaria - $i)
+               // ." Voy a esperar ". PHP_EOL;
                 $hilo->wait();
             }
         }
@@ -28,7 +28,7 @@ class Consumidor extends Threaded {
 }
 class Contenedor extends Volatile {
     public $cantidad = 0; public $maximo = 5; public $minimo = 0;
-    public $acciones =[]; public $consdiaria =5;  public $proddiaria =5;
+    public $acciones =[]; public $consdiaria =4;  public $proddiaria =5;
     public function  producir($id){
         $this->cantidad++;
         $this->acciones[] = $id." producir";
@@ -66,7 +66,7 @@ class HiloFabrica extends Thread {
    }
     public function run() {
             $this->synchronized(function(){
-                //echo "run.synchronized.".$this->accion. PHP_EOL;
+                echo "run.synchronized.".$this->accion. PHP_EOL;
                 $this->tarea->accion($this);
              }, $this);
     }
@@ -78,10 +78,10 @@ class HiloFabrica extends Thread {
         },$this);
     }
     }
-$miPool = new Pool(9);
+$miPool = new Pool(10);
 $cant_hilos = 10;
 $info = new Contenedor();
-for ($i = 1; $i <=$cant_hilos; $i++) {
+for ($i = 0; $i <=$cant_hilos; $i++) {
     $my = new HiloFabrica($i,$info);
     $miPool->submit($my);
 }

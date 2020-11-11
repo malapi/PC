@@ -8,7 +8,7 @@ class Productor extends Threaded {
         for($i=0; $i <= $hilo->info->proddiaria;$i++){
            // if ($hilo->info->hayespacio()){
                 $hilo->info->producir($hilo->id);
-                echo "Recien Produci ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
+               // echo "Recien Produci ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
                
                // sleep(1);
            // }
@@ -26,9 +26,9 @@ class Consumidor extends Threaded {
         for($i=0; $i < $hilo->info->consdiaria;$i++){
             if($hilo->info->hayparacomer()){
                 $hilo->info->consumir($hilo->id);
-                echo "Recien Consumi ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
+               // echo "Recien Consumi ".$hilo->id." Tengo ".$hilo->info->cantidad. PHP_EOL;
             } else {
-                echo "Consumir ".$hilo->id.", me faltan ". ($hilo->info->consdiaria - $i)." Voy a esperar ". PHP_EOL;
+               // echo "Consumir ".$hilo->id.", me faltan ". ($hilo->info->consdiaria - $i)." Voy a esperar ". PHP_EOL;
                 //print_r($this->info);
                 $hilo->wait();
             }
@@ -121,8 +121,5 @@ for ($i = 0; $i <=$cant_hilos; $i++) {
     $my = new HiloFabrica($i,$info);
     $miWorker->stack($my);
 }
-while ($miWorker->collect()){
-
-}
-
+while ($miWorker->collect()){}
 $miWorker->shutdown();
