@@ -94,7 +94,7 @@ class Contenedor extends Volatile {
 }
 $miWorker = new Worker();
 $miWorker->start();
-$cant_hilos = 9;
+$cant_hilos = 5;
 $info = new Contenedor();
 $acciones = new Accion($info);
 for ($i = 0; $i <=$cant_hilos; $i++) {

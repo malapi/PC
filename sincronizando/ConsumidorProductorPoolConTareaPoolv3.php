@@ -1,27 +1,19 @@
 <?php
 class Accion extends Thread{
-     private $id;
     public function __construct($c)  {
         $this->info = $c;
     }
     public function producir($id){
-        //$this->id = $id;
         $this->synchronized(function($id){
             echo "Recien entro al Productor ".$id." Tengo ".$this->info->cantidad. PHP_EOL;
             for($i=0; $i < $this->info->proddiaria;$i++){
-               // if ($hilo->info->hayespacio()){
                     $this->info->producir($id);
                     echo "Recien Produci ".$id." Tengo ".$this->info->cantidad. PHP_EOL;
-                   
-                   // sleep(1);
-               // }
                $this->notify();
             }
-            //$this->notify();
         },$id); echo "Termine me voy Productor ".$id. PHP_EOL;
         }
     public function consumir($id){
-        //$this->id = $id;
      $this->synchronized(function($id){
         echo "Recien entro a Consumir ".$id."  Tengo ".$this->info->cantidad. PHP_EOL;
         for($i=0; $i < $this->info->consdiaria;$i++){
@@ -30,15 +22,11 @@ class Accion extends Thread{
                 echo "Recien Consumi ".$id." Tengo ".$this->info->cantidad. PHP_EOL;
             } else {
                 echo "Consumir ".$id."  me faltan ". ($this->info->consdiaria - $i)." Voy a esperar ". PHP_EOL;
-                //print_r($this->info);
                 $this->wait();
             }
         }
         echo "Termine me voy Consumir ".$id."  ". PHP_EOL;
-},$id);
-}
-}
-
+},$id);}}
 class Productor extends Thread {
     private $accion;
     public function __construct($id,$accion){
@@ -60,25 +48,18 @@ class Consumidor extends Thread {
     }
 }
 class Contenedor extends Volatile {
-    public $cantidad = 0;
-    public $maximo = 5;
-    public $minimo = 0;
-    public $acciones =[];
-    public $consdiaria =5;
-    public $proddiaria =5;
-    public $parar = false;
+    public $cantidad = 0;    public $maximo = 5;     public $minimo = 0;
+    public $acciones =[];    public $consdiaria =5;     public $proddiaria =5; 
    public function  producir($id){
         $this->cantidad++;
         $this->acciones[] = $id." producir";
     }
-
     public function  consumir($id){
         if($this->cantidad>0){
             $this->cantidad--;
             $this->acciones[] = $id." consumir";
         }
     }
-
     public function  hayparacomer(){
         return $this->cantidad > $this->minimo;
     }
