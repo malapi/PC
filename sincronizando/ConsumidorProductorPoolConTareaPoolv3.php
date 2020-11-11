@@ -93,7 +93,6 @@ class Contenedor extends Volatile {
     }
 }
 $miPool = new Pool(5);
-//$miWorker->start();
 $cant_hilos = 5;
 $info = new Contenedor();
 $acciones = new Accion($info);
@@ -108,9 +107,5 @@ for ($i = 0; $i <=$cant_hilos; $i++) {
         $miPool->submit($tb);
     }
 }
-
-while ($miPool->collect()){
-    
-
-}
+while ($miPool->collect()){}
 $miPool->shutdown();
